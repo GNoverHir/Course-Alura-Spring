@@ -1,5 +1,7 @@
 package spring.vollmed.alura.controller;
 
+import jakarta.validation.Valid;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +13,8 @@ import spring.vollmed.alura.cliente.DadosCadastroCliente;
 public class ClienteController {
 
     @PostMapping
-    public void cadastrar(@RequestBody DadosCadastroCliente dados){
+    @Transactional
+    public void cadastrar(@RequestBody @Valid DadosCadastroCliente dados){
         System.out.println(dados);
     }
 }
