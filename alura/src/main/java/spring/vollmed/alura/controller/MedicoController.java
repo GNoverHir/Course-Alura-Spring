@@ -2,9 +2,10 @@ package spring.vollmed.alura.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import spring.vollmed.alura.cliente.DadosCadastroCliente;
 import spring.vollmed.alura.medico.*;
 import spring.vollmed.alura.medico.DadosCadastroMedico;
 
@@ -24,8 +25,8 @@ public class MedicoController {
     }
 
     @GetMapping
-    public List<DadosListagemMedico> Listar(){
-        return repository.findAll().stream().map(DadosListagemMedico::new).toList();
+    public Page<DadosListagemMedico> listar(Pageable paginacao){
+        return repository.findAll(paginacao).map(DadosListagemMedico::new);
     }
 
 }
