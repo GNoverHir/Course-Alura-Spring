@@ -11,6 +11,27 @@ import spring.vollmed.alura.medico.*;
 import spring.vollmed.alura.medico.DadosCadastroMedico;
 
 
+//Use este codigo SQL para erro no flyway:
+//delete from flyway_schema_history where success = 0;
+
+        //JSON que espera receber:
+//{
+//        "nome": "Teste ",
+//        "email": "testan@voll.med",
+//        "telefone": "11930283743",
+//        "crm": "21313",
+//        "especialidade": "CARDIOLOGIA",
+//        "endereco": {
+//        "logradouro": "rua 1",
+//        "bairro": "bairro",
+//        "cep": "12345678",
+//        "cidade": "Brasília",
+//        "uf": "DF",
+//        "numero": "1",
+//        "complemento": "complemtento"
+//        }
+//        }
+
 @RestController
 @RequestMapping("medico")
 public class MedicoController {

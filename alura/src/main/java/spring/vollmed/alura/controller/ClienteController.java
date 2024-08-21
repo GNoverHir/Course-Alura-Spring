@@ -13,6 +13,28 @@ import spring.vollmed.alura.cliente.DadosCadastroCliente;
 import spring.vollmed.alura.cliente.DadosListagemCliente;
 import spring.vollmed.alura.medico.DadosListagemMedico;
 
+
+//Use este codigo SQL para erro no flyway:
+//delete from flyway_schema_history where success = 0;
+
+
+    //JSON que espera receber:
+//    {
+//        "nome": "jagunçõ ",
+//            "email": "jagunço@voll.med",
+//            "telefone": "389274028",
+//            "cpf": "39028174921",
+//            "endereco": {
+//                  "logradouro": "rua 1",
+//                  "bairro": "bairro",
+//                  "cep": "12345678",
+//                  "cidade": "Brasília",
+//                  "uf": "DF",
+//                  "numero": "1",
+//                  "complemento": "complemtento"
+//    }
+//    }
+
 @RestController
 @RequestMapping("cliente")
 public class ClienteController {
