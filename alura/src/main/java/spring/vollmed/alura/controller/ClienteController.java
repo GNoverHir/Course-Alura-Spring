@@ -7,10 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import spring.vollmed.alura.cliente.Cliente;
-import spring.vollmed.alura.cliente.ClienteRepository;
-import spring.vollmed.alura.cliente.DadosCadastroCliente;
-import spring.vollmed.alura.cliente.DadosListagemCliente;
+import spring.vollmed.alura.cliente.*;
+import spring.vollmed.alura.medico.DadosAtualizarMedico;
 import spring.vollmed.alura.medico.DadosListagemMedico;
 
 
@@ -50,7 +48,21 @@ public class ClienteController {
     }
 
     @GetMapping
-    public Page<DadosListagemCliente> listar(@PageableDefault(size = 10, sort = {"cpf"}) Pageable paginacao) {
-        return repository.findAll(paginacao).map(DadosListagemCliente::new);
+    public Page<DadosListagemCliente> listar(@PageableDefault(size = 10, sort = {"id"}) Pageable paginacao) {
+        return repository.findAllByAtivoTrue(paginacao).map(DadosListagemCliente::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizarCliente dados){
+        var cliente = repository.getReferenceById(dados.id());
+        cliente.atualizarInformacoes(dados);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id){
+        var cliente = repository.getReferenceById(id);
+        cliente.Excluir();
     }
 }
