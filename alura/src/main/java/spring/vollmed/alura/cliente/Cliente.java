@@ -22,6 +22,11 @@ public class Cliente {
     @Embedded
     private Endereco endereco;
 
+
+    public Cliente(){
+
+    }
+
     public Cliente(DadosCadastroCliente dados) {
         this.nome = dados.nome();
         this.email = dados.email();
