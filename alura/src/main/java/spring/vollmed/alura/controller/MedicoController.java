@@ -1,7 +1,6 @@
 package spring.vollmed.alura.controller;
 
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import spring.vollmed.alura.medico.*;
 import spring.vollmed.alura.medico.DadosCadastroMedico;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("medico")
@@ -28,7 +26,7 @@ public class MedicoController {
 
     @GetMapping
     public Page<DadosListagemMedico> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
-        return repository.findAll(paginacao).map(DadosListagemMedico::new);
+        return repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
     }
 
     @PutMapping
@@ -38,10 +36,20 @@ public class MedicoController {
         medico.atualizarInformacoes(dados);
     }
 
+    //Excluir totalmente:
+
+//    @DeleteMapping("{id}")
+//    @Transactional
+//    public void excluir(@PathVariable Long id){
+//        repository.deleteById(id);
+//    }
+
+
+    // Exlusão Lógica - Consiste em intativar o medico, e nao excluir totalmente
     @DeleteMapping("{id}")
     @Transactional
     public void excluir(@PathVariable Long id){
-        repository.deleteById(id);
+        var medico = repository.getReferenceById(id);
+        medico.Excluir();
     }
-
 }
