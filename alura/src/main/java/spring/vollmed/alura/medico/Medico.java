@@ -1,6 +1,7 @@
 package spring.vollmed.alura.medico;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import spring.vollmed.alura.endereco.Endereco;
@@ -38,5 +39,21 @@ public class Medico {
         this.crm = dados.crm();
         this.endereco = new Endereco(dados.endereco());
         this.especialidade = dados.especialidade();
+    }
+
+    public void atualizarInformacoes(@Valid DadosAtualizarMedico dados) {
+
+        if (dados.nome() != null){
+            this.nome = dados.nome();
+        }
+
+        if (dados.telefone() != null){
+            this.telefone = dados.telefone();
+        }
+
+        if (dados.endereco() != null){
+            this.endereco.atualizarInformacoes(dados.endereco());
+        }
+
     }
 }
